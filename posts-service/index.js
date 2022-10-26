@@ -9,13 +9,18 @@ const bodyParser = require('body-parser');
 //Used to generate a random ID that we are going to assign to the post the user is trying to create
 const { randomBytes } = require('crypto');
 
+const cors = require('cors');
+
 //app is an object returned by express(). Actually it instantiates Express and assigns app variable to it.
 const app = express();
 
 //To use the body parser
 app.use(bodyParser.json());
 
-//object to store posts that have been created
+//wire up cors as a middleware - ensure call cors as a function
+app.use(cors());
+
+//object to store all posts in an in-memory data structure
 const posts = {};
 
 // req is an object containing information about the HTTP request that raised the event. In response to req, you use res to send back the desired HTTP response.
